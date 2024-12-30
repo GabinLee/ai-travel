@@ -1,74 +1,99 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <LinearGradient
+      colors={["#191f28", "#596E8E"]}
+      style={styles.background}
+    >
+      <StatusBar style="light" />
+      <SafeAreaView style={{flex: 1}}>
+        <View style={styles.container}>
+          <Text style={styles.mainTitle}>AI로 시작하는 여행</Text>
+          <Text style={styles.subTitle}>나만의 특별한 여정을 발견하세요</Text>
+
+          <View style={styles.buttonGroup}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>랜덤 추천</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>내 주변 여행지 찾기</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Link href="/travel/SearchPlace"
+            style={{marginHorizontal: "auto"}}
+          >
+            <View style={styles.buttonSearch}>
+              <Ionicons name="search-outline" size={20} color="#fff" />
+              <Text style={styles.buttonSearchText}>어떤 여행을 찾아드릴까요?</Text>
+            </View>
+          </Link>
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  background: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  container: {
+    flex: 1,
+    paddingTop: 137,
+    paddingBottom: 37,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  mainTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
+    lineHeight: 38,
+    color: "#fff",
+    textAlign: "center",
   },
-});
+  subTitle: {
+    marginTop: 2,
+    fontSize: 20,
+    lineHeight: 28,
+    color: "rgb(209, 213, 219)",
+    textAlign: "center",
+  },
+  buttonGroup: {
+    marginTop: "auto",
+    marginBottom: 37,
+    flexDirection: "row",
+    justifyContent: "center",
+    columnGap: 6,
+  },
+  button: {
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#fff",
+    borderRadius: 8
+  },
+  buttonText: {
+    color: "#fff",
+  },
+  buttonSearch: {
+    width: 342,
+    height: 56,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: "auto",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.4)",
+    borderRadius: 28,
+  },
+  buttonSearchText: {
+    color: "#fff",
+    marginLeft: 4,
+  },
+})
