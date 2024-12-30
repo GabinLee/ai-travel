@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, Text, StyleSheet, ActivityIndicator, View, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import { HeaderItem } from "@/components/common/HeaderItem";
 import { SearchResultSkeleton } from "@/components/common/SearchResultSkeleton";
 import { Ionicons } from "@expo/vector-icons";
@@ -69,10 +69,12 @@ export default function SearchResultPage() {
               btnType="close"
             />
             
-            <TouchableOpacity style={{height: 48, marginTop: 28, marginHorizontal: 16, marginBottom: 20, paddingHorizontal: 12, flexDirection: "row", alignItems: "center", columnGap: 4, borderRadius: 12, borderColor: "#D1D5DB", borderWidth: 1, backgroundColor: "#F2F4F6"}}>
-              <Ionicons name="location" size={20} color={"#111827"} />
-              <Text>다시 검색하기</Text>
-            </TouchableOpacity>
+            <Link href="/travel/SearchPlace" style={{ marginTop: 28, marginHorizontal: 16, marginBottom: 20}}>
+              <View style={{width: "100%", height: 48, paddingHorizontal: 12, flexDirection: "row", alignItems: "center", columnGap: 4, borderRadius: 12, borderColor: "#D1D5DB", borderWidth: 1, backgroundColor: "#F2F4F6"}}>
+                <Ionicons name="location" size={20} color={"#111827"} />
+                <Text>다시 검색하기</Text>
+              </View>
+            </Link>
           </>
         )}
       </ScrollView>
